@@ -9,7 +9,54 @@
 </head>
 
 <body>
+  <ul class="prizes"></ul>
+
   <script>
+
+    const myMap = new Map();
+
+    myMap.set('name', 'brody');
+    myMap.set(100, 'This is a number');
+
+    const person1 = {
+      name: 'wes',
+      age: 200,
+    }
+
+    myMap.set(person1, "Really cool information");
+    console.log(myMap);
+
+    const score = 100;
+    const prizes = new Map();
+
+    prizes.set(100, "Duck");
+    prizes.set(200, "Cat");
+    prizes.set(300, "Horse");
+
+    console.log(prizes);
+
+    console.log(`You win a ${prizes.get(score)}`);
+
+    const ul = document.querySelector('.prizes');
+    
+    //foreach only gives value, not key
+    // prizes.forEach(entry => {
+    //   console.log(entry);
+    // });
+
+    //FOR OF will give key and value.
+    // for(const prize of prizes) {
+    //   console.log(prize[0], prize[1]);
+    // };
+
+    // Can take it further and destructure the for of loop
+    for(const [points, prize] of prizes) {
+      const li = `<li>${points} - ${prize}</li>`;
+      ul.insertAdjacentHTML("beforeend", li);
+    }
+
+    const arrayMap = new Map([ [1,2], [3,4] ]);
+
 
   </script>
 </body>

@@ -12,6 +12,52 @@
 
 <body>
 
+  <script>
+
+    const names = [
+      'brody',
+      'piper',
+    ]
+
+    names.push('diggie');
+
+    // Mutative Method
+    // changes original
+    const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    // const numbersBackwards = numbers.reverse();
+    // console.log(numbersBackwards);
+
+    // Immutable Method
+    const pizzaSlice = numbers.slice(2,4);
+    console.log(pizzaSlice);
+
+    const numbersReversed = [...numbers];
+    console.log(numbersReversed.reverse());
+
+    const bikes = ['bianchi', 'miele', 'panasonic', 'miyata'];
+    const newBikes = [...bikes.slice(0,2), 'benoto', ...bikes.slice(2)];
+
+    const comments = [
+      { text: 'Cool Beans', id: 123 },
+      { text: 'Love this', id: 133 },
+      { text: 'Neato', id: 233 },
+      { text: 'good bikes', id: 333 },
+      { text: 'so good', id: 433 },
+    ];
+
+    function deleteComment(id, comment) {
+      // find the index of the comment we want to delete in the array
+      // const commentIndex = comments.findIndex((comment) => comment.id === id);
+      const commentIndex = comments.findIndex(function(comment) {
+        return comment.id === id;
+      });
+      // make a new array without that item in it.
+      return [...comments.slice(0, commentIndex), ...comments.slice(commentIndex + 1)];
+    }
+
+
+  </script>
+
 </body>
 
 </html>

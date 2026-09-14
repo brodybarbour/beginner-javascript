@@ -9,7 +9,91 @@
 </head>
 
 <body>
+  <input type="text" name="first" value="Brody">
+  <script src="https://unpkg.com/lodash@4.18.1/lodash.js"></script>
+  
   <script>
+
+    const age = 200;
+    const nameInput = document.querySelector('[name=first]');
+    const name = nameInput.value;
+
+    const person = {
+      name: "Brody",
+      propertyToCheck: "NEVER",
+      age,
+      clothing: {
+        shirts: 25,
+        pants: 5,
+        shoes: 4
+      },
+      // sayHello: function(greeting = 'Hello') {
+      //   return `${greeting} ${this.name}`;
+      // }
+      sayHello(greeting = 'Hello') {
+        return `${greeting} ${this.name}`;
+      },
+      sneeze: () => {
+        console.log("achoo");
+      }
+    };
+
+    person.job = "Web Developer";
+
+    // console.log(person.age);
+    // const propertyToCheck = prompt("What do you want to check?");
+    // console.log(propertyToCheck);
+    // console.log(person[propertyToCheck]);
+    // console.log(person.propertyToCheck);
+
+    const person1 = {
+      first: 'Brody',
+      last: 'Barbour',
+      clothing: {
+        shirts: 10,
+        pants: 3,
+      }
+    }
+
+    const person2 = {
+      first: 'Brody',
+      last: 'Barbour'
+    }
+
+    // const person3 = {...person1};
+    const person3 = _.cloneDeep(person1); //Uses lodash library for cloneDeep method. Spread can only go one level deep. Will copy every level, but anything deeper than 1 is a reference to the initial object and will overwrite
+    person3.first = "Kobe";
+    person3.last = "Bryant";
+    // console.log(person1, person3);
+
+    const meatInventory = {
+      bacon: 2,
+      sausage: 3,
+    };
+
+    const veggieInventory = {
+      lettuce: 5,
+      tomatoes: 3,
+    };
+
+    const inventory = {
+      ...meatInventory,
+      ...veggieInventory,
+      oysters: 10,
+    };
+
+    function doStuff(data) {
+      data = 'Something else';
+      console.log(data);
+    }
+
+    function doStuff2(data) {
+      data.tomatoes = 1.00000000001;
+      console.log(data);
+    }
+
+    doStuff2(inventory);
+
 
   </script>
 </body>
