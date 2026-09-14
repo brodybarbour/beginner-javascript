@@ -10,6 +10,57 @@
 
 <body>
 
+  <script>
+    function buzzer() {
+      console.log("ENNNNNG!!!");
+    }
+
+    // setTimeout(buzzer, 500);
+
+    function setImmediateInterval(funcToRun, ms) {
+      //function that will immediately run:
+      funcToRun();
+
+      //function that fires on intervals
+      return setInterval(funcToRun, ms);
+    }
+
+    // setImmediateInterval(buzzer, 2000);
+
+    // function sayHi() {
+    //   console.log("Hi");
+    // }
+
+    // setImmediateInterval(sayHi, 3000);
+
+    // function destroy() {
+    //   document.body.innerHTML = `<p>HTML IS DESTROYED!</p>`
+    // }
+
+    // const bombTimer = setTimeout(destroy, 5000);
+
+    // window.addEventListener("click", function() {
+    //   console.log("You saved the world");
+    //   clearTimeout(bombTimer);
+    // });
+
+    const poopStorm = setInterval(function() {
+      console.log('💩');
+      console.log('hehehehe');
+    }, 10);
+
+    // window.addEventListener("click", function() {
+    //   console.log("You stopped it");
+    //   clearInterval(poopStorm);
+    // })
+
+    setTimeout(function() {
+      clearInterval(poopStorm)
+      console.log("This killed the storm");
+    }, 3000);
+
+  </script>
+
 </body>
 
 </html>
