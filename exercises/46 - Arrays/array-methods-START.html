@@ -16,11 +16,41 @@
 
     const buns = ['egg', 'wonder', 'brioche'];
 
+    console.log(buns.join(' or '));
+
+
     const meats = {
       beyond: 10,
       beef: 5,
       pork: 7
     };
+
+    console.log(Object.entries(meats));
+    console.log(Object.keys(meats));
+    console.log(Object.values(meats));
+
+    Object.values(meats).forEach(qty => {
+      console.log(qty);
+    });
+
+    Object.keys(meats).forEach(qty => {
+      console.log(qty);
+    });
+
+    Object.entries(meats).forEach(entry => {
+      console.log(entry);
+      // const key = entry[0];
+      // const value = entry[1];
+      /// can clean up the above code by destructuring
+      // This is taking the first value from the array and assining it to the variable "key", and doing the same for the second value, but assigning to "value"
+      const [key, value] = entry;
+      console.log(`Key: ${key} Value: ${value}`);
+    });
+
+    // Way to further destructure the whole function:
+    Object.entries(meats).forEach(([meat, qty]) => {
+      console.log(meat, qty);
+    })
 
     const prices = {
       hotDog: 453,
@@ -39,7 +69,6 @@
       { comment: 'I DONT LIKE BURGERS', rating: 1 },
     ];
 
-
     /*
       Static Methods
     */
@@ -57,42 +86,181 @@
     */
 
     // Display all bun types with " or " - use join()
+    const bunString = buns.join(' or ');
+    console.log(bunString);
 
     // We have a string "hot dogs,hamburgers,sausages,corn" - use split() to turn it into a string
+    const foodString = "hot dogs, hamburgers, sausages, corn";
+    console.log(foodString.split(','));
 
     // take the last item off toppings with pop()
+    const lastItem = toppings.pop();
+    console.log(lastItem);
+
     // add it back with push()
+    toppings.push(lastItem);
+    console.log(toppings, "with the push");
+
     // take the first item off toppings with shift()
+    const firstItem = toppings.shift();
+    console.log(firstItem);
+
     // add it back in with unshift()
-    // Do the last four,but immutable (with spreads and new variables)
+    toppings.unshift(firstItem);
+    console.log(toppings, "After unshift");
+
+    // Do the last few steps, but immutable:
+    // Make a copy of the toppings array with slice(), minus last item
+    let newToppings = toppings.slice(0, toppings.length - 1);
+    console.log(newToppings);
+
+    // added last item back into array
+    newToppings = [...newToppings, toppings[toppings.length-1]];
+    console.log(newToppings, "Last item added back in at end")
+
+    // added item that was removed back in, but in the front:
+    newToppings = [toppings[toppings.length-1], ...newToppings];
+    console.log(newToppings, "Last topping at beginning");
+
+    // Make a copy of the toppings array with .slice()
+    const toppingsCopy = toppings.slice(0);
 
 
-    // Make a copy of the toppings array with slice()
     // Make a copy of the toppings array with a spread
+    const toppingsArray = [...toppings];
+    console.log(toppingsArray, "toppings array");
+
     // take out items 3 to 5 of your new toppings array with splice()
+    toppingsArray.splice(3,5);
+    console.log(toppingsArray);
+
     // find the index of Avocado with indexOf() / lastIndexOf()
+    const avocado = toppings.indexOf("Avocado");
+    console.log(avocado);
+
+
     // Check if hot sauce is in the toppings with includes()
-    // add it if it's not
+    // add it if it's not, add it in
+    const isInToppingsList = toppings.includes("Hot Sauce");
+    console.log(isInToppingsList);
+
+    if (!isInToppingsList) {
+      toppings.push("Hot Sauce");
+      console.log("added hot sauce");
+    }
+
     // flip those toppings around with reverse()
+    // mutable
+    // toppings.reverse();
+
+    // immutable
+    const toppingsReversed = [...toppings].reverse();
+    console.log(toppingsReversed);
 
     /*
       Callback Methods
     */
 
     // find the first rating that talks about a burger with find()
+    // const burgerRating = feedback.find(rating => rating.comment.includes('burg'));
+    // console.log(burgerRating);
+
+    function findBurgerRating(singleFeedback) {
+      return singleFeedback.comment.includes('burg');
+      // if (singleFeedback.comment.includes('burg')) {
+      //   return true;
+      // } else {
+      //   return false;
+      // }
+    }
+
+    const burgRating = feedback.find(findBurgerRating);
+    console.log(burgRating);
+
+    // const findBurgerRatingArrow = (singleFeedback) => singleFeedback.comment.includes('burg');
+
+    function findByWord(word) {
+      return function(singleFeedback) {
+        return singleFeedback.comment.includes(word);
+      };
+    }
+
+    // const burgFinder = findByWord('burg');
+    const burgRating2 = feedback.find(findByWord('burg'));
+
+    // const smoothieFinder = findByWord('Smoothie');
+    const smoothieRating = feedback.find(findByWord('Smoothie'));
+
+
     // find all ratings that are above 2 with filter()
+    // const positiveReviews = feedback.filter(singleFeedback => {
+    //   if (singleFeedback.rating >= 2) {
+    //     return true;
+    //   } else {
+    //     return false;
+    //   }
+    // });
+
+    const positiveReviews = feedback.filter(singleFeedback => singleFeedback.rating > 2);
+    console.table(positiveReviews);
+    // function positiveReviews(singleFeedback) {
+    //   if (singleFeedback.rating > 2) {
+    //     return true;
+    //   } else {
+    //     return false;
+    //   }
+    // }
+    // const positiveReviewsConst = feedback.filter(positiveReviews);
+    // console.table(positiveReviewsConst);
+
+    function filterByMinRating(minRating) {
+      return function(singleFeedback) {
+        return singleFeedback.rating >= minRating;
+      }
+    }
+
+    const fiveStars = feedback.filter(filterByMinRating(5));
+    console.table(fiveStars);
+
+
     // find all ratings that talk about a burger with filter()
+    // const burgerReviews = feedback.filter(singleFeedback => singleFeedback.comment.includes("burg"));
+    const burgerReviews = feedback.filter(findByWord("burg"));
+    console.table(burgerReviews);
+
     // Remove the one star rating however you like!
+    const goodReviews = feedback.filter(single => single.rating !== 1);
+    // const goodReviews = feedback.filter(function(single) {
+    //   if (single.rating !== 1) {
+    //     return true;
+    //   };
+    // });
+    console.log(goodReviews);
 
     // check if there is at least 5 of one type of meat with some()
-    // make sure we have at least 3 of every meat with every()
-    // sort the toppings alphabetically with sort()
-    // sort the order totals from most expensive to least with .sort()
-    // Sort the prices with sort()
+    const meatCountChecker = Object.values(meats).some(meatValue => meatValue >= 5);
 
-    /*
-      Looping Methods (next)
-    */
+    // make sure we have at least 3 of every meat with every()
+    const enoughMeatChecker = Object.values(meats).every(meatValue => meatValue >= 3);
+
+    // sort the toppings alphabetically with sort()
+    const toppingsSorted = toppings.sort();
+
+    // sort the order totals from most expensive to least with .sort()
+    function numbersSort(a, b) {
+      return a - b;
+    }
+
+    console.log(orderTotals.sort(numbersSort));
+
+    // Sort the prices with sort()
+    const sortedProducts = Object.entries(prices).sort(function(a,b) {
+      const aPrice = a[1];
+      const bPrice = b[1];
+      return bPrice - aPrice;
+    });
+
+    console.table(sortedProducts);
 
   </script>
 </body>

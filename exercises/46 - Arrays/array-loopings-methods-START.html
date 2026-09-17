@@ -128,6 +128,154 @@
     /*
       Looping Methods
     */
+   function logToppings(topping, index, originalArray) {
+    console.log(topping);
+    const nextTopping = originalArray[index + 1];
+    const prevTopping = originalArray[index - 1];
+
+    prevTopping ? console.log(prevTopping) : null;
+    nextTopping ? console.log(nextTopping) : null;
+
+    index === originalArray.length - 1
+      ? console.log('goodbye')
+      : console.log('getting the next topping');
+
+    console.log('--------🍕-----');
+   }
+
+  toppings.forEach(logToppings);
+
+   // OR //
+  // toppings.forEach(topping => {
+  //   console.log(topping);
+  // });
+
+  // Mapping:
+  function addArms(face) {
+    return `👋 ${face} 👋`;
+  }
+
+  const toys = faces.map(addArms);
+  console.log(toys);
+
+  const coolPeeps = ['brody', 'piper', 'simon'].map(capitalize).map(makeCool);
+
+  function makeCool(name) {
+    console.log(`${name} is really cool`);
+  }
+
+  function capitalize(word) {
+    // return word[0].toUpperCase() + word.slice(1);
+    return `${word[0].toUpperCase()}${word.slice(1)}`
+  }
+
+  console.log(coolPeeps);
+
+  const orderTotalsWithTax = orderTotals.map(total => total * 1.13);
+
+  function taxCalculator(total) {
+    return total * 1.13
+  }
+  console.log(orderTotalsWithTax);
+
+
+
+  const cleanPeople = people.map(function(person) {
+    // console.log(person);
+    const birthday = new Date(person.birthday).getTime();
+    const now = new Date();
+    //const age = now - birthday; //returns in milliseconds
+    const age = Math.floor((now - birthday) / 31536000000);
+    // console.log(age);
+    return {
+      age: age,
+      //or just age,
+      name: `${person.names.first} ${person.names.last}`
+    }
+  });
+
+  console.table(cleanPeople);
+
+  // Filter: returns an array of all matching
+  const over40 = cleanPeople.filter((person) => {
+    // if (person.age > 40) {
+    //   return true;
+    // }
+
+    // return false;
+    return person.age > 40;
+  });
+
+  //could also do
+  /*
+  const over40 = cleanPeople.filter(person => person.age > 40);
+  */
+
+  console.log(over40);
+
+  // Find: returns only 1 item, as an object
+
+  const matchingStudent = students.find(student => student.id === '565a');
+  console.log(matchingStudent);
+
+  // Could abstract this to something more usable:
+  function findById(id) {
+    return function isMatch(student) {
+      return student.id === id;
+    }
+  }
+
+  const matchingStudentFunction = students.find(findById('de5f'));
+  console.log(matchingStudentFunction);
+
+  function findByInfo(prop, searchedProp) {
+    return function isMatch(student) {
+      return student[prop] === searchedProp;
+    }
+  }
+
+  const studentMatch = students.find(findByInfo('id', '54cb'));
+  const studentMatch2 = students.find(findByInfo('first_name', 'Lorry'));
+
+  console.log(studentMatch2);
+
+  console.clear();
+
+  // Reduce:
+  function tallyNumbers(tally, currentTotal) {
+    console.log(`The current tally is ${tally}`);
+    console.log(`The current total is ${currentTotal}`);
+    console.log('--------');
+    return tally + currentTotal;
+  };
+
+  const allOrders = orderTotals.reduce(tallyNumbers, 0);
+  console.log(allOrders);
+  console.clear();
+
+  // Second Reduce Example
+
+  function inventoryReducer(totals, item) {
+    console.log(`Looping over ${item.type}`);
+    // totals.shirt = totals.shirt + 1 || 1;
+    totals[item.type] ? (totals[item.type] += 1) : (totals[item.type] = 1);
+    return totals;
+  }
+
+  const inventoryCounts = inventory.reduce(inventoryReducer, {});
+  console.log(inventoryCounts);
+
+  // function inventoryPriceReducer(acc, item) {
+  //   console.log(`Current item is $${item.price}`);
+  //   return acc + item.price;
+  // }
+
+  // const totalInventoryPrice = inventory.reduce(inventoryPriceReducer, 0);
+  // console.log(totalInventoryPrice);
+
+  // Could also do the above like this:
+  const inventoryPriceReducer = inventory.reduce((acc, item) => acc + item.price, 0);
+  console.log(`The total inventory cost is: $${inventoryPriceReducer}`);
 
   </script>
 </body>

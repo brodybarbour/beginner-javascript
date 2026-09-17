@@ -13,6 +13,51 @@
     // Grab all the text from a web page
     // Count how many times each letter and number occurs
 
+    const text = `[0, 1, 2, 3, 4].reduce( (accumulator, currentValue, currentIndex, array) => accumulator + currentValue);
+    If you were to provide an initialValue as the second argument to reduce(), the result would look like this:
+    The value returned by reduce() in this case would be 20.
+
+    Examples
+    Sum all the values of an array`
+    // console.log(text);
+
+    const textArray = [...text]
+      .filter(isValidCharacter)
+      .map(lowercase)
+      .reduce(instanceCounter,{});
+
+    // Creates an object out of array
+    const sortedArray = Object.entries(textArray).sort(sortByValue);
+
+
+    // const sanitizedText = textArray.filter(char => char.match(/[a-zA-Z0-9]/));
+    // abstrating the above into something more readable and usable for other cases:
+    function isValidCharacter(char) {
+      return char.match(/[a-z0-9]/i);
+    }
+
+    function lowercase(char) {
+      return char.toLowerCase();
+    }
+
+    function instanceCounter(counts, char) {
+      console.log(`looping over ${char}`);
+      counts[char] ? (counts[char] += 1) : (counts[char] = 1);
+      return counts;
+    }
+
+    function sortByValue(a, b) {
+      // const aValue = a[1];
+      // const bValue = b[1];
+      // return bValue - aValue;
+      // return b[1] - a[1]; //This is highest to lowest
+      return a[1] - b[1]; // Since we dont need to store in a variable
+    }
+
+    // const sanitizedText = textArray.filter(isValidCharacter);
+    console.log(textArray);
+
+    console.log(sortedArray);
 
   </script>
 </body>
