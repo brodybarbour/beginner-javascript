@@ -10,6 +10,45 @@
 
 <body>
 
+  <script>
+    const person = {
+      name: 'Brody Barbour',
+      sayHi() {
+        return (`hey ${this.name}`);
+      }
+    };
+
+    const jenna = {name : 'Jenna'};
+    const sayHi = person.sayHi.bind(jenna);
+
+    const bill = {
+      total: 1000,
+      calculate: function(taxRate) {
+        return this.total + (this.total * taxRate);
+      },
+      describe(mealType, drinkType, taxRate) {
+        console.log(`your meal of ${mealType} with a drink of ${drinkType} was ${this.calculate(taxRate)}`);
+      },
+    }
+
+    const total = bill.calculate(0.13);
+    // const calc = bill.calculate.bind(bill);
+    const calc = bill.calculate.bind({total: 500}, 0.06);
+
+    console.log(total);
+    console.log(calc());
+
+    const total2 = bill.calculate.call({total: 500}, 0.06);
+    console.log(total2);
+
+
+    const total3 = bill.calculate.apply({total: 325}, [0.60]);
+    console.log(total3);
+
+    const myMeal = bill.describe.call(bill, 'pizza', 'slurpee', 0.13);
+    const myMeal2 = bill.describe.apply(bill, ['pizza', 'slurpee', 0.13]);
+    console.log(myMeal);
+  </script>
 </body>
 
 </html>
