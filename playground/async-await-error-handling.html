@@ -32,6 +32,27 @@
       });
     }
 
+    function handleError(err) {
+      console.log('there was an error');
+      console.log(err);
+    }
+
+    async function go() {
+      const pizza = await makePizza(['pineapple']);
+    }
+
+    go().catch(handleError);
+
+    // Using a higher order function method of checking
+    // function makeSafe(fn, errorHandler) {
+    //   return function() {
+    //     fn().catch(errorHandler)
+    //   }
+    // }
+
+    // const safeGo = makeSafe(go, handleError);
+    // safeGo();
+
   </script>
 </body>
 
