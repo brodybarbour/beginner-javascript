@@ -9,7 +9,28 @@
 </head>
 
 <body>
+  <p class="user"></p>
   <script>
+    const baseEndpoint = "https://api.github.com";
+    const usersEndpoint = `${baseEndpoint}/users`;
+    const userEl = document.querySelector('.user');
+
+    async function displayUser(username) {
+      userEl.textContent = "Loading...";
+      // fetch the endpoint
+      const response = await fetch(`${usersEndpoint}/${username}`);
+      // convert endpoint information to json
+      const data = await response.json();
+      userEl.textContent = `${data.name} - ${data.blog}`;
+    }
+
+    function errorHandler(err) {
+      console.log("there was an error");
+      console.log(err);
+      userEl.textContent = `Something went wrong: ${err}`;
+    }
+
+    displayUser("stolinski").catch(errorHandler);
 
   </script>
 </body>

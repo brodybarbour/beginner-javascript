@@ -1,7 +1,6 @@
 {
   "name": "dogrecipes",
   "version": "1.0.0",
-  "description": "",
   "main": "scripts.js",
   "scripts": {
     "start": "parcel index.html"
@@ -9,9 +8,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "parcel": "2.0.1"
+    "parcel": "2.0.1",
+    "parcel-bundler": "^1.12.5"
   },
   "browserslist": [
     "last 1 chrome versions"
-  ]
+  ],
+  "description": "",
+  "devDependencies": {
+    "@babel/core": "^7.29.7",
+    "@babel/preset-env": "^7.29.7"
+  }
 }
