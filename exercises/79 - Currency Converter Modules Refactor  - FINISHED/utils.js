@@ -1,15 +1,16 @@
-export function generateOptions(options) {
+function generateOptions(options) {
   return Object.entries(options)
     .map(
       ([currencyCode, currencyName]) =>
-        `<option value="${currencyCode}">${currencyCode} - ${currencyName}</option>`
-    )
-    .join('');
+      `<option value="${currencyCode}">${currencyCode} - ${currencyName}</option>`)
+    .join("");
 }
 
-export function formatCurrency(amount, currency) {
-  return Intl.NumberFormat('en-US', {
+function formatCurrency(amount, currency) {
+  return Intl.NumberFormat("en-US", {
     style: 'currency',
-    currency,
+    currency
   }).format(amount);
 }
+
+export { generateOptions, formatCurrency };
